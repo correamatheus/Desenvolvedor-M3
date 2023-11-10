@@ -1,1 +1,178 @@
 @import "reset";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700;800&display=swap");
+
+// VARIAVEIS CORES
+$cor-blue: #00c0ee;
+$cor-black: #000000;
+$cor-gray: #666666;
+$cor-white: #ffffff;
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 17.37px;
+  border-bottom: 2px solid #c7c7c7;
+}
+
+nav .chart {
+  align-self: center;
+}
+
+.title__page {
+  font-family: "Open Sans", sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #333;
+  text-align: center;
+  padding-top: 1.5rem;
+}
+
+.filtro {
+  display: flex;
+  margin: 0 auto;
+  width: 90%;
+  margin-top: 12px;
+}
+
+.filtro__bntFiltrar,
+.filtro__bntOrdenar {
+  width: 100%;
+  color: #666;
+  font-family: "Open Sans", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height: 49px;
+  border: 1px solid $cor-gray;
+  background: $cor-white;
+  cursor: pointer;
+}
+
+.catalogo {
+  margin: 0 auto;
+  margin-top: 2.179rem;
+  display: grid;
+  gap: 8px; /* Espaço entre os itens do catálogo */
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.catalogo__item {
+  text-align: center;
+}
+.catalogo__item img {
+  width: 161.793px;
+  height: 242.554px;
+  flex-shrink: 0;
+}
+.catalogo__item--titulo {
+  margin-bottom: 7.98px;
+  color: $cor-black;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.catalogo__item--preco {
+  color: $cor-black;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.catalogo__item--parcelamento {
+  color: $cor-gray;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.catalogo__item--btnComprar {
+  display: flex;
+  width: 162px;
+  height: 33px;
+  padding: 7px 49px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  background: $cor-black;
+  color: $cor-white;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  border: unset;
+  margin: 0 auto;
+  margin-top: 11.71px;
+}
+
+.filtro__ordenar--header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid $cor-gray;
+}
+
+.filtro__ordenar--header p {
+  color: $cor-gray;
+  font-family: Open Sans;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.filtro__ordenar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $cor-white;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.fechar-ordenar {
+  align-self: center;
+}
+
+.fechar-ordenar svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.orderna__list {
+  gap: 30px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.orderna__item {
+  cursor: pointer;
+  color: $cor-black;
+  font-family: Open Sans;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

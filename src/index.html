@@ -1,19 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desenvolvedor M3</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Desenvolvedor M3</title>
-  <link rel="stylesheet" href="main.css" />
-</head>
-
-<body>
-
-</body>
-<h1>Desafio m3</h1>
-
-<script src="bundle.js"></script>
-
+  <body>
+    <header>
+      <nav>
+        <div class="logo"><img src="img/logo-m3.png" alt="" /></div>
+        <div class="chart"><img src="img/icon_bag.png" alt="" /></div>
+      </nav>
+    </header>
+    <div class="title__page"><h2>Blusas</h2></div>
+    <div class="filtro">
+      <button class="filtro__bntFiltrar">Filtrar</button>
+      <button class="filtro__bntOrdenar">Ordenar</button>
+    </div>
+    <div class="filtro__ordenar" style="display: none">
+      <div class="filtro__ordenar--header">
+        <p>ORDERNAR</p>
+        <div class="fechar-ordenar">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="19"
+            height="20"
+            viewBox="0 0 19 20"
+            fill="none"
+          >
+            <path d="M0.5 18.852L17.5547 1.00001" stroke="black" />
+            <line
+              y1="-0.5"
+              x2="25.2899"
+              y2="-0.5"
+              transform="matrix(0.711746 0.702437 -0.874311 0.485367 0 1.23547)"
+              stroke="black"
+            />
+          </svg>
+        </div>
+      </div>
+      <ul class="orderna__list">
+        <li class="orderna__item">Mais recente</li>
+        <li class="orderna__item">Maior preço</li>
+        <li class="orderna__item">Menor preço</li>
+      </ul>
+      <!-- Conteúdo da div de ordenação aqui -->
+    </div>
+    <div class="catalogo">
+      <div class="catalogo__item">
+        <img src="img/img_2.png" alt="" />
+        <p class="catalogo__item--titulo">Camiseta Mescla</p>
+        <div class="catalogo__item--preco">
+          <p class="catalogo__item--preco">R$ 28,00</p>
+          <p class="catalogo__item--parcelamento">até 3x de R$9,33</p>
+        </div>
+        <button class="catalogo__item--btnComprar">COMPRAR</button>
+      </div>
+      <div class="catalogo__item">
+        <img src="img/img_2.png" alt="" />
+        <p class="catalogo__item--titulo">Camiseta Mescla</p>
+        <div class="catalogo__item--preco">
+          <p class="catalogo__item--preco">R$ 28,00</p>
+          <p class="catalogo__item--parcelamento">até 3x de R$9,33</p>
+        </div>
+        <button class="catalogo__item--btnComprar">COMPRAR</button>
+      </div>
+      <div class="catalogo__item">Item 3</div>
+      <div class="catalogo__item">Item 4</div>
+      <div class="catalogo__item">Item 5</div>
+    </div>
+    <script src="bundle.js"></script>
+  </body>
 </html>
