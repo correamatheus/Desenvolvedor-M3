@@ -1,78 +1,43 @@
 import { Product } from "./Product";
 
 const serverUrl = "http://localhost:5000";
-let products: Product[] = []; // Armazenar os dados dos produtos
+let products: Product[] = [];
 
-async function fetchData(url: string): Promise<Product[]> {
-  try {
-    const response = await fetch(url);
+function esconderElemento(selector: string) {
+  const element = document.querySelector(selector) as HTMLElement | null;
 
-    if (!response.ok) {
-      throw new Error("Erro ao obter dados da API");
-    }
-
-    return response.json();
-  } catch (error) {
-    // console.error(error.message);
-    throw error;
+  if (element) {
+    element.style.display = "none";
   }
 }
 
-function showFilterPanel(panelSelector: string) {
-  const filter = document.querySelector(".filtro") as HTMLElement | null;
-  const panel = document.querySelector(panelSelector) as HTMLElement | null;
+function mostrarElemento(selector: string) {
+  const element = document.querySelector(selector) as HTMLElement | null;
 
-  if (!filter || !panel) {
-    console.error("Elementos não encontrados.");
-    return;
-  }
-
-  filter.style.display = "none";
-  panel.style.display = "block";
-
-  // Verifica se os produtos já foram carregados antes de chamar a API novamente
-  if (products.length === 0) {
-    atualizarProdutos();
+  if (element) {
+    element.style.display = "block";
   }
 }
 
-function closePanel(panelSelector: string) {
-  const filter = document.querySelector(".filtro") as HTMLElement | null;
-  const panel = document.querySelector(panelSelector) as HTMLElement | null;
-
-  if (!filter || !panel) {
-    console.error("Elementos não encontrados.");
-    return;
-  }
-
-  filter.style.display = "flex";
-  panel.style.display = "none";
+function ordenarProdutosPorDataRecente(produtos: Product[]): Product[] {
+  return produtos.slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-function ordenarPorDataRecente(produtos: Product[]): Product[] {
-  return produtos.slice().sort((a, b) => {
-    // Ordene em ordem decrescente com base na propriedade `date`
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+function ordenarProdutosPorPrecoMaior(produtos: Product[]): Product[] {
+  return produtos.slice().sort((a, b) => b.price - a.price);
 }
 
-function ordenarPorPrecoMaior(produtos: Product[]): Product[] {
-  return produtos.slice().sort((a, b) => {
-    return b.price - a.price;
-  });
-}
-
-function renderProduct(product: Product): HTMLElement {
+function renderizarProduto(produto: Product): HTMLElement {
   const item = document.createElement("div");
   item.classList.add("catalogo__item");
 
   const image = document.createElement("img");
-  image.src = product.image;
-  image.alt = product.name;
+  image.src = produto.image;
+  image.alt = produto.name;
 
   const title = document.createElement("p");
   title.classList.add("catalogo__item--titulo");
-  title.textContent = product.name;
+  title.textContent = produto.name;
 
   const priceWrapper = document.createElement("div");
   priceWrapper.classList.add("catalogo__item--preco");
@@ -81,15 +46,13 @@ function renderProduct(product: Product): HTMLElement {
   price.textContent = "R$ ";
 
   const priceValue = document.createElement("span");
-  priceValue.textContent = product.price.toFixed(2);
+  priceValue.textContent = produto.price.toFixed(2);
 
   price.appendChild(priceValue);
 
   const installment = document.createElement("p");
   installment.classList.add("catalogo__item--parcelamento");
-  installment.textContent = `até ${
-    product.parcelamento[0]
-  }x de R$${product.parcelamento[1].toFixed(2)}`;
+  installment.textContent = `até ${produto.parcelamento[0]}x de R$${produto.parcelamento[1].toFixed(2)}`;
 
   const buyButton = document.createElement("button");
   buyButton.classList.add("catalogo__item--btnComprar");
@@ -106,156 +69,111 @@ function renderProduct(product: Product): HTMLElement {
   return item;
 }
 
-function renderProducts(products: Product[]) {
-  const catalog = document.querySelector(".catalogo") as HTMLElement | null;
+function renderizarProdutos(produtos: Product[]) {
+  const catalogo = document.querySelector(".catalogo") as HTMLElement | null;
 
-  if (!catalog) {
+  if (!catalogo) {
     console.error("Elemento de catálogo não encontrado.");
     return;
   }
 
-  catalog.innerHTML = ""; // Limpar conteúdo existente
+  catalogo.innerHTML = "";
 
-  products.forEach((product) => {
-    const item = renderProduct(product);
-    catalog.appendChild(item);
+  produtos.forEach((produto) => {
+    const item = renderizarProduto(produto);
+    catalogo.appendChild(item);
   });
 }
 
 async function atualizarProdutos() {
   try {
-    const timestamp = new Date().getTime(); // Adiciona um timestamp único
+    const timestamp = new Date().getTime();
     const response = await fetch(`${serverUrl}/products?timestamp=${timestamp}`);
+
     if (!response.ok) {
       throw new Error("Erro ao obter dados da API");
     }
-    const newProducts = await response.json();
-    products = newProducts; 
-    renderProducts(products);
+
+    const novosProdutos = await response.json();
+    products = novosProdutos;
+    renderizarProdutos(products);
     console.log(products);
   } catch (error) {
     console.error(error.message);
   }
 }
 
-async function AtualizarProdutoOrdemRecente() {
+async function atualizarProdutosPorDataRecente() {
   try {
     const timestamp = new Date().getTime();
     const response = await fetch(`${serverUrl}/products?timestamp=${timestamp}`);
+
     if (!response.ok) {
       throw new Error("Erro ao obter dados da API");
     }
-    const newProducts = await response.json();
-    products = ordenarPorDataRecente(newProducts);
-    renderProducts(products);
+
+    const novosProdutos = await response.json();
+    products = ordenarProdutosPorDataRecente(novosProdutos);
+    renderizarProdutos(products);
     console.log(products);
-  } catch (error) {    
+  } catch (error) {
     console.error(error.message);
   }
 }
 
-async function atualizarProdutoPrecoMaior() {
+async function atualizarProdutosPorPrecoMaior() {
   try {
     const timestamp = new Date().getTime();
     const response = await fetch(`${serverUrl}/products?timestamp=${timestamp}`);
+
     if (!response.ok) {
       throw new Error("Erro ao obter dados da API");
     }
-    const newProducts = await response.json();
-    products = ordenarPorPrecoMaior(newProducts);
-    renderProducts(products);
+
+    const novosProdutos = await response.json();
+    products = ordenarProdutosPorPrecoMaior(novosProdutos);
+    renderizarProdutos(products);
     console.log(products);
-  } catch (error) {    
+  } catch (error) {
     console.error(error.message);
   }
-    
 }
 
+function configurarBotoes() {
+  const filtroBtnFiltrar = document.querySelector(".filtro__bntFiltrar") as HTMLButtonElement | null;
+  const filtroBtnOrdenar = document.querySelector(".filtro__bntOrdenar") as HTMLButtonElement | null;
+  const fecharOrdenarBtn = document.querySelector(".fechar-ordenar") as HTMLElement | null;
+  const fecharFiltrarBtn = document.querySelector(".fechar-filtrar") as HTMLElement | null;
+  const ordenarRecenteBtn = document.querySelector("#ordenar__item--recente") as HTMLElement | null;
+  const ordenarPrecoMaiorBtn = document.querySelector("#ordenar__item--preco") as HTMLElement | null;
 
-function main() {
-  console.log(serverUrl);
-
-  const filtroBtnFiltrar = document.querySelector(
-    ".filtro__bntFiltrar"
-  ) as HTMLButtonElement | null;
-  const filtroBtnOrdenar = document.querySelector(
-    ".filtro__bntOrdenar"
-  ) as HTMLButtonElement | null;
-  const fecharOrdenarBtn = document.querySelector(
-    ".fechar-ordenar"
-  ) as HTMLElement | null;
-  const fecharFiltrarBtn = document.querySelector(
-    ".fechar-filtrar"
-  ) as HTMLElement | null;
-  const ordenarRecenteBtn = document.querySelector(
-    "#ordenar__item--recente"
-  ) as HTMLElement | null;
-  const ordenarPrecoMaiorBtn = document.querySelector(
-    "#ordenar__item--preco"
-  ) as HTMLElement | null;
-
-  if (
-    filtroBtnFiltrar &&
-    filtroBtnOrdenar &&
-    fecharOrdenarBtn &&
-    fecharFiltrarBtn &&
-    ordenarRecenteBtn &&
-    ordenarPrecoMaiorBtn
-  ) {
+  if (filtroBtnFiltrar && filtroBtnOrdenar && fecharOrdenarBtn && fecharFiltrarBtn && ordenarRecenteBtn && ordenarPrecoMaiorBtn) {
     const mostrarFiltrar = () => {
-      const filtro = document.querySelector(".filtro") as HTMLElement | null;
-      const filtrar = document.querySelector(
-        ".filtro__filtrar"
-      ) as HTMLElement | null;
-
-      if (filtro && filtrar) {
-        filtro.style.display = "none";
-        filtrar.style.display = "block";
-      }
+      esconderElemento(".filtro");
+      mostrarElemento(".filtro__filtrar");
     };
 
     const mostrarOrdenar = () => {
-      const filtro = document.querySelector(".filtro") as HTMLElement | null;
-      const ordenar = document.querySelector(
-        ".filtro__ordenar"
-      ) as HTMLElement | null;
-
-      if (filtro && ordenar) {
-        filtro.style.display = "none";
-        ordenar.style.display = "block";
-      }
+      esconderElemento(".filtro");
+      mostrarElemento(".filtro__ordenar");
     };
 
     const fecharOrdenar = () => {
-      const filtro = document.querySelector(".filtro") as HTMLElement | null;
-      const ordenar = document.querySelector(
-        ".filtro__ordenar"
-      ) as HTMLElement | null;
-
-      if (filtro && ordenar) {
-        filtro.style.display = "flex";
-        ordenar.style.display = "none";
-      }
+      mostrarElemento(".filtro");
+      esconderElemento(".filtro__ordenar");
     };
 
     const fecharFiltrar = () => {
-      const filtro = document.querySelector(".filtro") as HTMLElement | null;
-      const filtrar = document.querySelector(
-        ".filtro__filtrar"
-      ) as HTMLElement | null;
-
-      if (filtro && filtrar) {
-        filtro.style.display = "flex";
-        filtrar.style.display = "none";
-      }
+      mostrarElemento(".filtro");
+      esconderElemento(".filtro__filtrar");
     };
 
     const ordenarRecente = () => {
-      AtualizarProdutoOrdemRecente();
+      atualizarProdutosPorDataRecente();
     };
 
-    const ordenarPorPrecoMaior = () => {      
-      atualizarProdutoPrecoMaior();
+    const ordenarPorPrecoMaior = () => {
+      atualizarProdutosPorPrecoMaior();
     };
 
     filtroBtnFiltrar.addEventListener("click", mostrarFiltrar);
@@ -267,7 +185,12 @@ function main() {
   } else {
     console.error("Botões não encontrados.");
   }
+}
+
+function iniciarAplicacao() {
+  console.log(serverUrl);
+  configurarBotoes();
   atualizarProdutos();
 }
 
-document.addEventListener("DOMContentLoaded", main);
+document.addEventListener("DOMContentLoaded", iniciarAplicacao);
