@@ -43,14 +43,187 @@
         </div>
       </div>
       <ul class="orderna__list">
-        <li class="orderna__item">Mais recente</li>
-        <li class="orderna__item">Maior preço</li>
+        <li class="orderna__item" id="ordenar__item--recente">Mais recente</li>
+        <li class="orderna__item" id="ordenar__item--preco">Maior preço</li>
         <li class="orderna__item">Menor preço</li>
       </ul>
       <!-- Conteúdo da div de ordenação aqui -->
     </div>
+    <div class="filtro__filtrar" style="display: none">
+      <div class="filtro__filtrar--header">
+        <p>FILTRAR</p>
+        <div class="fechar-filtrar">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="19"
+            height="20"
+            viewBox="0 0 19 20"
+            fill="none"
+          >
+            <path d="M0.5 18.852L17.5547 1.00001" stroke="black" />
+            <line
+              y1="-0.5"
+              x2="25.2899"
+              y2="-0.5"
+              transform="matrix(0.711746 0.702437 -0.874311 0.485367 0 1.23547)"
+              stroke="black"
+            />
+          </svg>
+        </div>
+      </div>
+      <ul class="filtrar__list">
+        <li class="filtrar__item">
+          <p>Cores</p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="15"
+            viewBox="0 0 20 15"
+            fill="none"
+          >
+            <path
+              d="M1 1L10 14L19 1.0135"
+              stroke="#666666"
+              stroke-linecap="round"
+            />
+          </svg>
+          <ul class="dropdown-content">
+            <li class="dropdown-content__item">
+              <input type="checkbox" name="" id="" />
+              <p class="dropdown-content__item--text">Amarelo</p>
+            </li>
+            <li class="dropdown-content__item">
+              <input type="checkbox" name="" id="" />
+              <p class="dropdown-content__item--text">Azul</p>
+            </li>
+            <li class="dropdown-content__item">
+              <input type="checkbox" name="" id="" />
+              <p class="dropdown-content__item--text">Branco</p>
+            </li>
+            <li class="dropdown-content__item">
+              <input type="checkbox" name="" id="" />
+              <p class="dropdown-content__item--text">Cinza</p>
+            </li>
+            <li class="dropdown-content__item">
+              <input type="checkbox" name="" id="" />
+              <p class="dropdown-content__item--text">Laranja</p>
+            </li>
+            <li class="dropdown-content__item">
+              <input type="checkbox" name="" id="" />
+              <p class="dropdown-content__item--text">Verde</p>
+            </li>
+            <li class="dropdown-content__item">
+              <input type="checkbox" name="" id="" />
+              <p class="dropdown-content__item--text">Vermelho</p>
+            </li>
+            <li class="dropdown-content__item">
+              <input type="checkbox" name="" id="" />
+              <p class="dropdown-content__item--text">Preto</p>
+            </li>
+            <li class="dropdown-content__item">
+              <input type="checkbox" name="" id="" />
+              <p class="dropdown-content__item--text">Rosa</p>
+            </li>
+            <li class="dropdown-content__item">
+              <input type="checkbox" name="" id="" />
+              <p class="dropdown-content__item--text">Vinho</p>
+            </li>
+          </ul>
+        </li>
+        <li class="filtrar__item">
+          <p>Tamanhos</p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="15"
+            viewBox="0 0 20 15"
+            fill="none"
+          >
+            <path
+              d="M1 1L10 14L19 1.0135"
+              stroke="#666666"
+              stroke-linecap="round"
+            />
+          </svg>
+          <ul class="dropdownTamanho dropdown-content">
+            <li class="dropdownTamanho__item">
+              <input type="checkbox" name="tamanho" id="tam-p" />
+              <label for="tam-p" class="dropdownTamanho__item--text">P</label>
+            </li>
+            <li class="dropdownTamanho__item">
+              <input type="checkbox" name="tamanho" id="tam-m" />
+              <label for="tam-m" class="dropdownTamanho__item--text">M</label>
+            </li>
+            <li class="dropdownTamanho__item">
+              <input type="checkbox" name="tamanho" id="tam-g" />
+              <label for="tam-g" class="dropdownTamanho__item--text">G</label>
+            </li>
+            <li class="dropdownTamanho__item">
+              <input type="checkbox" name="tamanho" id="tam-gg" />
+              <label for="tam-gg" class="dropdownTamanho__item--text">GG</label>
+            </li>
+            <li class="dropdownTamanho__item">
+              <input type="checkbox" name="tamanho" id="tam-u" />
+              <label for="tam-u" class="dropdownTamanho__item--text">U</label>
+            </li>
+            <li class="dropdownTamanho__item">
+              <input type="checkbox" name="tamanho" id="tam-36" />
+              <label for="tam-36" class="dropdownTamanho__item--text">36</label>
+            </li>
+            <li class="dropdownTamanho__item">
+              <input type="checkbox" name="tamanho" id="tam-38" />
+              <label for="tam-38" class="dropdownTamanho__item--text">38</label>
+            </li>
+            <li class="dropdownTamanho__item">
+              <input type="checkbox" name="tamanho" id="tam-40" />
+              <label for="tam-40" class="dropdownTamanho__item--text">40</label>
+            </li>
+          </ul>
+        </li>
+        <li class="filtrar__item">
+          <p>Faixa de preço</p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="15"
+            viewBox="0 0 20 15"
+            fill="none"
+          >
+            <path
+              d="M1 1L10 14L19 1.0135"
+              stroke="#666666"
+              stroke-linecap="round"
+            />
+          </svg>
+          <ul class="dropdown-content dropdown-content__valores">
+            <li class="dropdown-content__item dropdown-content__item--valores">
+              <input type="radio" name="radio__valor" id="" />
+              <p class="dropdown-content__item--text">de R$0 até R$50</p>
+            </li>
+            <li class="dropdown-content__item dropdown-content__item--valores">
+              <input type="radio" name="radio__valor" id="" />
+              <p class="dropdown-content__item--text">de R$51 até R$150</p>
+            </li>
+            <li class="dropdown-content__item dropdown-content__item--valores">
+              <input type="radio" name="radio__valor" id="" />
+              <p class="dropdown-content__item--text">de R$151 até R$300</p>
+            </li>
+            <li class="dropdown-content__item dropdown-content__item--valores">
+              <input type="radio" name="radio__valor" id="" />
+              <p class="dropdown-content__item--text">de R$301 até R$500</p>
+            </li>
+            <li class="dropdown-content__item dropdown-content__item--valores">
+              <input type="radio" name="radio__valor" id="" />
+              <p class="dropdown-content__item--text">a partir de R$ 500</p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <!-- Conteúdo da div de ordenação aqui -->
+    </div>
     <div class="catalogo">
-      <div class="catalogo__item">
+
+      <!-- <div class="catalogo__item">
         <img src="img/img_2.png" alt="" />
         <p class="catalogo__item--titulo">Camiseta Mescla</p>
         <div class="catalogo__item--preco">
@@ -58,19 +231,7 @@
           <p class="catalogo__item--parcelamento">até 3x de R$9,33</p>
         </div>
         <button class="catalogo__item--btnComprar">COMPRAR</button>
-      </div>
-      <div class="catalogo__item">
-        <img src="img/img_2.png" alt="" />
-        <p class="catalogo__item--titulo">Camiseta Mescla</p>
-        <div class="catalogo__item--preco">
-          <p class="catalogo__item--preco">R$ 28,00</p>
-          <p class="catalogo__item--parcelamento">até 3x de R$9,33</p>
-        </div>
-        <button class="catalogo__item--btnComprar">COMPRAR</button>
-      </div>
-      <div class="catalogo__item">Item 3</div>
-      <div class="catalogo__item">Item 4</div>
-      <div class="catalogo__item">Item 5</div>
+      </div>      -->
     </div>
     <script src="bundle.js"></script>
   </body>
