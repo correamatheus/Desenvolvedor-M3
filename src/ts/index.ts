@@ -211,7 +211,7 @@ async function atualizarProdutosTamanhoCorPreco() {
     ).map((checkbox) =>
       (checkbox as HTMLInputElement).id.replace("tam-", "").toUpperCase()
     );
-    
+
     const faixasSelecionadas = Array.from(
       document.querySelectorAll(
         ".dropdown-content__item--valores input[type='radio']:checked"
@@ -372,7 +372,6 @@ async function atualizarProdutosPreco() {
   }
 }
 
-
 function configurarEventosCheckboxPreco() {
   const checkboxesPreco = document.querySelectorAll(
     ".dropdown-content__item--valores input[type='radio']"
@@ -523,6 +522,45 @@ function configurarEventoFiltroCor() {
     });
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const verTodasCoresBtn = document.getElementById("verTodasCoresBtn");
+
+  if (verTodasCoresBtn) {
+    verTodasCoresBtn.addEventListener("click", function () {
+      // Exibe todas as cores ocultas
+      const coresItens = document.querySelectorAll("#cores__ocultas");     
+      coresItens.forEach((item) => {
+
+        if (item instanceof HTMLElement) {
+          // Verifica o estilo atual
+          const currentDisplayStyle = window.getComputedStyle(item).getPropertyValue("display");  
+          // Verifica se o estilo atual é "flex"
+          if (currentDisplayStyle === "flex") {           
+            item.style.display = "none";
+          } else {
+            item.style.display = "flex";
+          }
+        }
+    
+      });
+    
+
+     
+      // if (!coresItens.length) {      
+      //   const coresOcultas = document.querySelectorAll("#cores__ocultas");   
+      //   coresOcultas.forEach((item) => {
+      //     if (item instanceof HTMLElement) {
+      //       item.style.display = "none";
+      //     }
+      //   });
+      // }
+
+      // Oculta o botão "Ver todas as cores"
+      // verTodasCoresBtn.style.display = "none";
+    });
+  }
+});
 
 function configurarEventos() {
   configurarEventosCheckboxCores();

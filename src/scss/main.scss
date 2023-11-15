@@ -456,7 +456,7 @@ nav .chart {
   .filtrar__list--desktop-tamanho {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 80%;
     min-width: unset;
     gap: 0.5rem;
   }
@@ -495,6 +495,7 @@ nav .chart {
 
   .titulo__preco {
     margin-top: 25px;
+    margin-bottom: 14px;
   }
 
   .catalogo__item img {
@@ -536,15 +537,16 @@ nav .chart {
     list-style: none;
     padding: 0;
     margin: 0;
-    border: 1px solid rgba(0, 0, 0, 0.50);
-    background: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background: #fff;
     width: 140px;
     height: 107px;
     flex-shrink: 0;
     cursor: pointer;
   }
 
-  .filtro__bntOrdenar--desktop:hover + .orderna__list--desktop, .orderna__list--desktop:hover {
+  .filtro__bntOrdenar--desktop:hover + .orderna__list--desktop,
+  .orderna__list--desktop:hover {
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -566,7 +568,7 @@ nav .chart {
   }
 
   .orderna__item--desktop:hover {
-    background: var(--primaria, #00C0EE);
+    background: var(--primaria, #00c0ee);
     padding-top: 5px;
     padding-bottom: 5px;
   }
@@ -578,34 +580,70 @@ nav .chart {
   .container__carregarMais--desktop {
     grid-column: 2;
   }
+
+  // ESCONDE O FILTRO PARA DESKTOP
+  .filtros__container--desktop {
+    display: none;
+  }
+
+  #verTodasCoresBtn {
+    display: flex;
+  }
 }
 
 @media screen and (min-width: 1200px) {
-  .container__desktop {
+  .catalogo {
+    gap: 64px;
+  }
+  .grid__desktop {
     display: grid;
     grid-template-columns: 1fr 4fr;
     padding: 0 10.375rem;
   }
 
-  .filtrar__list--desktop-tamanho {
+  .filtros__container--desktop {
     display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    min-width: unset;
-    gap: 0.5rem;
+    flex-direction: column;
+    width: 100%;
   }
 
-  .catalogo {
-    gap: 64px;
+  .dropdownTamanho__item input:checked + label {
+    background-color: #fff;
+    color: $cor-black;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
   }
 
-  .catalogo__item--titulo {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  .titulos__filtro--desktop {
+    color: #333;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
   }
 
-  .catalogo__item--btnComprar {
-    margin-top: 14px;
+  #verTodasCoresBtn {
+    border: none;
+    background-color: $cor-white;
+    width: 100%;
+    height: 16px;
+    flex-shrink: 0;
+    color: #666;
+    font-family: "Open Sans";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%; /* 12px */
+    text-decoration-line: underline;
+    text-align: start;
+    padding: 0;
   }
-
 }
