@@ -155,39 +155,33 @@ function renderizarProdutos(produtos: Product[], limite: number) {
     return;
   }
 
-  // Verifique a largura da tela
+  
   const isTelaPequena = window.matchMedia("(max-width: 992px)").matches;
   console.log("Is Tela Pequena:", isTelaPequena);
 
-  // Defina o limite com base na largura da tela
+
   let limiteParaRenderizar = isTelaPequena ? limiteInicialMobile : limite;
   console.log("Limite para Renderizar:", limiteParaRenderizar);
 
-  // Função para renderizar produtos
+  
   const renderizar = (limite: number) => {
-    // Limite o número de produtos a serem exibidos
     const produtosParaExibir = produtos.slice(0, limite);
     console.log("Produtos para Exibir:", produtosParaExibir);
 
-    // Limpe o conteúdo existente do catálogo
     catalogo.innerHTML = "";
 
-    // Renderize apenas os produtos dentro do limite
     produtosParaExibir.forEach((produto) => {
       const item = renderizarProduto(produto);
       catalogo.appendChild(item);
     });
 
-    // Verifique se há mais produtos além do limite
     if (produtos.length > limite) {
       console.log("Total de Produtos:", produtos.length);
 
-      // Adicione o botão "CARREGAR MAIS" se houver mais produtos
       const loadMoreButton = document.createElement("button");
       loadMoreButton.classList.add("carregarMais__desktop");
       loadMoreButton.textContent = "CARREGAR MAIS";
       loadMoreButton.addEventListener("click", () => {
-        // Ajuste a variável limite com base na largura da tela
         limiteParaRenderizar += isTelaPequena ? limiteInicialMobile : 9; // Ajuste conforme necessário
         console.log("Novo Limite:", limiteParaRenderizar);
 
@@ -202,22 +196,6 @@ function renderizarProdutos(produtos: Product[], limite: number) {
   // Renderizar produtos inicialmente
   renderizar(limiteParaRenderizar);
 }
-
-// function renderizarProdutos(produtos: Product[]) {
-//   const catalogo = document.querySelector(".catalogo") as HTMLElement | null;
-
-//   if (!catalogo) {
-//     console.error("Elemento de catálogo não encontrado.");
-//     return;
-//   }
-
-//   catalogo.innerHTML = "";
-
-//   produtos.forEach((produto) => {
-//     const item = renderizarProduto(produto);
-//     catalogo.appendChild(item);
-//   });
-// }
 
 async function atualizarProdutosFiltrosCores() {
   try {
