@@ -350,7 +350,50 @@ nav .chart {
 .btnCarregarMais {
   cursor: pointer;
 }
+
+.carregarMais__desktop {
+  display: inline-flex;
+  padding: 8px 31px;
+  align-items: flex-start;
+  gap: 10px;
+  background: #00c0ee;
+  color: $cor-white;
+  font-family: Open Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  border: none;
+  grid-column: span 2;
+  text-align: center;
+  margin: 1rem 6rem;
+  justify-content: center;
+
+}
+
 @media screen and (min-width: 992px) {
+  .carregarMais__desktop {
+    grid-column: 2;
+    display: inline-flex;
+    padding: 8px 31px;
+    align-items: flex-start;
+    gap: 10px;
+    background: #00c0ee;
+    color: $cor-white;
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    border: none;
+
+  text-align: unset;
+  margin: unset;
+  justify-content: center;
+  }
+
   nav {
     justify-content: space-between;
     padding: 0 166px;

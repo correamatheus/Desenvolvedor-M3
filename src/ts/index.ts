@@ -144,7 +144,10 @@ function renderizarProduto(produto: Product): HTMLElement {
   return item;
 }
 
-function renderizarProdutos(produtos: Product[]) {
+let limiteInicial = 9;
+let limiteInicialMobile = 4;
+
+function renderizarProdutos(produtos: Product[], limite: number) {
   const catalogo = document.querySelector(".catalogo") as HTMLElement | null;
 
   if (!catalogo) {
@@ -152,13 +155,69 @@ function renderizarProdutos(produtos: Product[]) {
     return;
   }
 
-  catalogo.innerHTML = "";
+  // Verifique a largura da tela
+  const isTelaPequena = window.matchMedia("(max-width: 992px)").matches;
+  console.log("Is Tela Pequena:", isTelaPequena);
 
-  produtos.forEach((produto) => {
-    const item = renderizarProduto(produto);
-    catalogo.appendChild(item);
-  });
+  // Defina o limite com base na largura da tela
+  let limiteParaRenderizar = isTelaPequena ? limiteInicialMobile : limite;
+  console.log("Limite para Renderizar:", limiteParaRenderizar);
+
+  // Função para renderizar produtos
+  const renderizar = (limite: number) => {
+    // Limite o número de produtos a serem exibidos
+    const produtosParaExibir = produtos.slice(0, limite);
+    console.log("Produtos para Exibir:", produtosParaExibir);
+
+    // Limpe o conteúdo existente do catálogo
+    catalogo.innerHTML = "";
+
+    // Renderize apenas os produtos dentro do limite
+    produtosParaExibir.forEach((produto) => {
+      const item = renderizarProduto(produto);
+      catalogo.appendChild(item);
+    });
+
+    // Verifique se há mais produtos além do limite
+    if (produtos.length > limite) {
+      console.log("Total de Produtos:", produtos.length);
+
+      // Adicione o botão "CARREGAR MAIS" se houver mais produtos
+      const loadMoreButton = document.createElement("button");
+      loadMoreButton.classList.add("carregarMais__desktop");
+      loadMoreButton.textContent = "CARREGAR MAIS";
+      loadMoreButton.addEventListener("click", () => {
+        // Ajuste a variável limite com base na largura da tela
+        limiteParaRenderizar += isTelaPequena ? limiteInicialMobile : 9; // Ajuste conforme necessário
+        console.log("Novo Limite:", limiteParaRenderizar);
+
+        // Renderize produtos com o novo limite
+        renderizar(limiteParaRenderizar);
+      });
+
+      catalogo.appendChild(loadMoreButton);
+    }
+  };
+
+  // Renderizar produtos inicialmente
+  renderizar(limiteParaRenderizar);
 }
+
+// function renderizarProdutos(produtos: Product[]) {
+//   const catalogo = document.querySelector(".catalogo") as HTMLElement | null;
+
+//   if (!catalogo) {
+//     console.error("Elemento de catálogo não encontrado.");
+//     return;
+//   }
+
+//   catalogo.innerHTML = "";
+
+//   produtos.forEach((produto) => {
+//     const item = renderizarProduto(produto);
+//     catalogo.appendChild(item);
+//   });
+// }
 
 async function atualizarProdutosFiltrosCores() {
   try {
@@ -185,7 +244,7 @@ async function atualizarProdutosFiltrosCores() {
     });
 
     products = produtosFiltrados;
-    renderizarProdutos(products);
+    renderizarProdutos(products, limiteInicial);
     console.log(products);
   } catch (error) {
     console.error(error.message);
@@ -233,7 +292,7 @@ async function atualizarProdutosTamanhoCorPreco() {
     });
 
     products = produtosFiltrados;
-    renderizarProdutos(products);
+    renderizarProdutos(products, limiteInicial);
     console.log(products);
   } catch (error) {
     console.error(error.message);
@@ -253,7 +312,7 @@ async function atualizarProdutos() {
 
     const novosProdutos = await response.json();
     products = novosProdutos;
-    renderizarProdutos(products);
+    renderizarProdutos(products, limiteInicial);
     console.log(products);
   } catch (error) {
     console.error(error.message);
@@ -273,7 +332,7 @@ async function atualizarProdutosPorDataRecente() {
 
     const novosProdutos = await response.json();
     products = ordenarProdutosPorDataRecente(novosProdutos);
-    renderizarProdutos(products);
+    renderizarProdutos(products, limiteInicial);
     console.log(products);
   } catch (error) {
     console.error(error.message);
@@ -293,7 +352,7 @@ async function atualizarProdutosPorPrecoMaior() {
 
     const novosProdutos = await response.json();
     products = ordenarProdutosPorPrecoMaior(novosProdutos);
-    renderizarProdutos(products);
+    renderizarProdutos(products, limiteInicial);
     console.log(products);
   } catch (error) {
     console.error(error.message);
@@ -313,7 +372,7 @@ async function atualizarProdutosPorPrecoMenor() {
 
     const novosProdutos = await response.json();
     products = ordenarProdutosPorPrecoMenor(novosProdutos);
-    renderizarProdutos(products);
+    renderizarProdutos(products, limiteInicial);
     console.log(products);
   } catch (error) {
     console.error(error.message);
@@ -334,7 +393,7 @@ async function atualizarProdutosTamanho() {
     const produtosFiltrados = filtrarPorTamanho(newProducts);
 
     products = produtosFiltrados;
-    renderizarProdutos(products);
+    renderizarProdutos(products, limiteInicial);
     console.log(products);
   } catch (error) {
     console.error(error.message);
@@ -365,7 +424,7 @@ async function atualizarProdutosPreco() {
     );
 
     products = produtosFiltrados;
-    renderizarProdutos(products);
+    renderizarProdutos(products, limiteInicial);
     console.log(products);
   } catch (error) {
     console.error(error.message);
@@ -529,26 +588,24 @@ document.addEventListener("DOMContentLoaded", function () {
   if (verTodasCoresBtn) {
     verTodasCoresBtn.addEventListener("click", function () {
       // Exibe todas as cores ocultas
-      const coresItens = document.querySelectorAll("#cores__ocultas");     
+      const coresItens = document.querySelectorAll("#cores__ocultas");
       coresItens.forEach((item) => {
-
         if (item instanceof HTMLElement) {
           // Verifica o estilo atual
-          const currentDisplayStyle = window.getComputedStyle(item).getPropertyValue("display");  
+          const currentDisplayStyle = window
+            .getComputedStyle(item)
+            .getPropertyValue("display");
           // Verifica se o estilo atual é "flex"
-          if (currentDisplayStyle === "flex") {           
+          if (currentDisplayStyle === "flex") {
             item.style.display = "none";
           } else {
             item.style.display = "flex";
           }
         }
-    
       });
-    
 
-     
-      // if (!coresItens.length) {      
-      //   const coresOcultas = document.querySelectorAll("#cores__ocultas");   
+      // if (!coresItens.length) {
+      //   const coresOcultas = document.querySelectorAll("#cores__ocultas");
       //   coresOcultas.forEach((item) => {
       //     if (item instanceof HTMLElement) {
       //       item.style.display = "none";
