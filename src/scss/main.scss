@@ -394,6 +394,10 @@ nav .chart {
 }
 
 @media screen and (min-width: 992px) {
+  .grid__desktop {
+    margin-top: 54px;
+  }
+
   .ordenar__list {
     display: flex;
     flex-direction: column;   
@@ -815,6 +819,10 @@ nav .chart {
 
 @media screen and (max-width: 992px) {
   .filtros__container--desktop {
+    display: none;
+  }
+
+  .ordenar__container {
     display: none;
   }
 }
