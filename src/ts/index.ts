@@ -43,7 +43,9 @@ function ordenarProdutosPorDataRecente(produtos: Product[]): Product[] {
 }
 
 function ordenarProdutosPorPrecoMaior(produtos: Product[]): Product[] {
+  console.log(produtos.slice().sort((a, b) => b.price - a.price));
   return produtos.slice().sort((a, b) => b.price - a.price);
+
 }
 
 function ordenarProdutosPorPrecoMenor(produtos: Product[]): Product[] {
@@ -354,6 +356,7 @@ async function atualizarProdutosPorPrecoMaior() {
 
     const novosProdutos = await response.json();
     products = ordenarProdutosPorPrecoMaior(novosProdutos);
+    console.log("AQUI");
     renderizarProdutos(products, limiteInicial);
     console.log(products);
   } catch (error) {
@@ -461,11 +464,20 @@ function configurarBotoes() {
   const ordenarRecenteBtn = document.querySelector(
     "#ordenar__item--recente"
   ) as HTMLElement | null;
+  const ordenarRecenteBtnMobile = document.querySelector(
+    "#ordenar__item--recente-mobile"
+  ) as HTMLElement | null;
   const ordenarPrecoMaiorBtn = document.querySelector(
     "#ordenar__item--preco"
   ) as HTMLElement | null;
+  const ordenarPrecoMaiorBtnMobile = document.querySelector(
+    "#ordenar__item--preco-mobile"
+  ) as HTMLElement | null;
   const ordenarPrecoMenorBtn = document.querySelector(
     "#ordenar__item--precoMenor"
+  ) as HTMLElement | null;
+  const ordenarPrecoMenorBtnMobile = document.querySelector(
+    "#ordenar__item--precoMenor-mobile"
   ) as HTMLElement | null;
 
   if (
@@ -474,6 +486,7 @@ function configurarBotoes() {
     fecharOrdenarBtn &&
     fecharFiltrarBtn &&
     ordenarRecenteBtn &&
+    ordenarRecenteBtnMobile &&
     ordenarPrecoMaiorBtn &&
     ordenarPrecoMenorBtn
   ) {
@@ -514,8 +527,11 @@ function configurarBotoes() {
     fecharOrdenarBtn.addEventListener("click", fecharOrdenar);
     fecharFiltrarBtn.addEventListener("click", fecharFiltrar);
     ordenarRecenteBtn.addEventListener("click", ordenarRecente);
+    ordenarRecenteBtnMobile.addEventListener("click", ordenarRecente);
     ordenarPrecoMaiorBtn.addEventListener("click", ordenarPorPrecoMaior);
+    ordenarPrecoMaiorBtnMobile.addEventListener("click", ordenarPorPrecoMaior);
     ordenarPrecoMenorBtn.addEventListener("click", ordenarPorPrecoMenor);
+    ordenarPrecoMenorBtnMobile.addEventListener("click", ordenarPorPrecoMenor);
   } else {
     console.error("Botões não encontrados.");
   }
@@ -640,18 +656,6 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
       });
-
-      // if (!coresItens.length) {
-      //   const coresOcultas = document.querySelectorAll("#cores__ocultas");
-      //   coresOcultas.forEach((item) => {
-      //     if (item instanceof HTMLElement) {
-      //       item.style.display = "none";
-      //     }
-      //   });
-      // }
-
-      // Oculta o botão "Ver todas as cores"
-      // verTodasCoresBtn.style.display = "none";
     });
   }
 });
