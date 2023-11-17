@@ -369,10 +369,124 @@ nav .chart {
   text-align: center;
   margin: 1rem 6rem;
   justify-content: center;
+}
 
+.container__itemCarrinho {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: #00c0ee;
+  position: absolute;
+  top: 15px;
+  right: 68px;
+  display: flex;
+  justify-content: center;
+}
+
+.numero__itemCarrinho {
+  color: $cor-white;
+  font-family: "Roboto";
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 @media screen and (min-width: 992px) {
+  .ordenar__list {
+    display: flex;
+    flex-direction: column;   
+  }
+
+  .ordenar__container {
+    position: absolute;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    width: 142px;
+    right: 159px;
+    top: 130px;
+  }
+
+  .titulo__ordenar {
+    cursor: pointer;
+  }
+
+  .ordenar__container span {
+    color: #000;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .ordenar__list {
+    gap: 10px;
+  }
+
+  .ordenar__item--desktop {
+    color: #000;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 9px;
+    cursor: pointer;
+    display: none;
+  }
+
+  #ordenar__item--maisrecente {
+    margin-top: 10px;
+  }
+
+  .titulo__ordenar svg {
+    width: 12px;
+    height: 9px;
+    flex-shrink: 0;
+    stroke-width: 1px;
+    stroke: #666;
+  }
+
+  .ordenar__item--desktop:hover {
+    background: var(--primaria, #00c0ee);
+    color: #fff;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .titulo__ordenar {
+    padding: 10px 0px 10px 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  }
+
+  .container__itemCarrinho {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    background: #00c0ee;
+    position: absolute;
+    top: 30px;
+    right: 160px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .numero__itemCarrinho {
+    color: $cor-white;
+    font-family: "Roboto";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
   .carregarMais__desktop {
     grid-column: 2;
     display: inline-flex;
@@ -389,9 +503,9 @@ nav .chart {
     text-transform: uppercase;
     border: none;
 
-  text-align: unset;
-  margin: unset;
-  justify-content: center;
+    text-align: unset;
+    margin: unset;
+    justify-content: center;
   }
 
   nav {
@@ -632,6 +746,14 @@ nav .chart {
   #verTodasCoresBtn {
     display: flex;
   }
+
+  #verTodasCoresBtn svg {
+    align-self: center;
+    padding-left: 2px;
+    width: 7px;
+    height: 5px;
+    flex-shrink: 0;
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -688,5 +810,83 @@ nav .chart {
     text-decoration-line: underline;
     text-align: start;
     padding: 0;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .filtros__container--desktop {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .container__itemCarrinho {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    background: #00c0ee;
+    position: absolute;
+    top: 15px;
+    right: 56px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .numero__itemCarrinho {
+    color: $cor-white;
+    font-family: "Roboto";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+@media screen and (min-width: 376px) and (max-width: 425px) {
+  .container__itemCarrinho {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    background: #00c0ee;
+    position: absolute;
+    top: 15px;
+    right: 68px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .numero__itemCarrinho {
+    color: $cor-white;
+    font-family: "Roboto";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+@media screen and (min-width: 426px) and (max-width: 768px) {
+  .container__itemCarrinho {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    background: #00c0ee;
+    position: absolute;
+    top: 15px;
+    right: 152px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .numero__itemCarrinho {
+    color: $cor-white;
+    font-family: "Roboto";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
 }

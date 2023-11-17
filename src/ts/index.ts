@@ -2,6 +2,7 @@ import { Product } from "./Product";
 
 const serverUrl = "http://localhost:5000";
 let products: Product[] = [];
+let itensNoCarrinho = 0;
 
 function esconderElemento(selector: string) {
   const element = document.querySelector(selector) as HTMLElement | null;
@@ -17,6 +18,21 @@ function mostrarElemento(selector: string) {
     element.style.display = "block";
   } else {
     element.style.display = "flex";
+  }
+}
+
+
+function adicionarAoCarrinho(produto: Product) {
+  // Adicione a lógica aqui para atualizar o carrinho
+  itensNoCarrinho++;
+  atualizarContadorCarrinho();
+}
+
+function atualizarContadorCarrinho() {
+  // Atualize a exibição do contador no seu aplicativo
+  const contadorCarrinho = document.getElementById("contadorCarrinho");
+  if (contadorCarrinho) {
+    contadorCarrinho.textContent = String(itensNoCarrinho);
   }
 }
 
@@ -101,6 +117,9 @@ function filtrarPorTamanho(produtos: Product[]): Product[] {
 }
 
 function renderizarProduto(produto: Product): HTMLElement {
+
+
+
   const item = document.createElement("div");
   item.classList.add("catalogo__item");
 
@@ -129,9 +148,14 @@ function renderizarProduto(produto: Product): HTMLElement {
     produto.parcelamento[0]
   }x de R$${produto.parcelamento[1].toFixed(2)}`;
 
+  // const buyButton = document.createElement("button");
+  // buyButton.classList.add("catalogo__item--btnComprar");
+  // buyButton.textContent = "COMPRAR";
+
   const buyButton = document.createElement("button");
   buyButton.classList.add("catalogo__item--btnComprar");
   buyButton.textContent = "COMPRAR";
+  buyButton.addEventListener("click", () => adicionarAoCarrinho(produto));
 
   priceWrapper.appendChild(price);
   priceWrapper.appendChild(installment);
@@ -560,6 +584,41 @@ function configurarEventoFiltroCor() {
   }
 }
 
+function mostrarOcultarOrdenarList() {
+  const ordenarList = document.querySelector(".ordenar__list") as HTMLElement;
+
+  if (ordenarList.style.display === "flex") {
+    ordenarList.style.display = "none";
+  } else {
+    ordenarList.style.display = "flex";
+  }
+}
+
+function toggleOrdenarItemsDisplay() {
+  const ordenarItems = document.querySelectorAll(".ordenar__item--desktop");
+
+  ordenarItems.forEach((item) => {
+    if (item instanceof HTMLElement) {
+      if (item.style.display === "flex") {
+        item.style.display = "none";
+      } else {
+        item.style.display = "flex";
+      }
+    }
+  });
+}
+
+function configurarEventoTituloOrdenar() {
+  const tituloOrdenar = document.querySelector(".titulo__ordenar");
+
+  if (tituloOrdenar) {
+    tituloOrdenar.addEventListener("click", () => {
+      mostrarOcultarOrdenarList();
+      toggleOrdenarItemsDisplay();
+    });
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const verTodasCoresBtn = document.getElementById("verTodasCoresBtn");
 
@@ -609,7 +668,8 @@ function iniciarAplicacao() {
   console.log(serverUrl);
   configurarBotoes();
   atualizarProdutos();
-  configurarEventos();
+  configurarEventos(); 
+  configurarEventoTituloOrdenar();
 }
 
 document.addEventListener("DOMContentLoaded", iniciarAplicacao);
