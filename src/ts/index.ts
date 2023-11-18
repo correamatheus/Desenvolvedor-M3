@@ -23,13 +23,11 @@ function mostrarElemento(selector: string) {
 
 
 function adicionarAoCarrinho(produto: Product) {
-  // Adicione a lógica aqui para atualizar o carrinho
   itensNoCarrinho++;
   atualizarContadorCarrinho();
 }
 
 function atualizarContadorCarrinho() {
-  // Atualize a exibição do contador no seu aplicativo
   const contadorCarrinho = document.getElementById("contadorCarrinho");
   if (contadorCarrinho) {
     contadorCarrinho.textContent = String(itensNoCarrinho);
@@ -70,7 +68,7 @@ function obterCoresSelecionadas(): string[] {
 
 function verificaFaixaDePreco(preco: number, faixas: string[]): boolean {
   if (faixas.length === 0) {
-    return true; // Nenhuma faixa selecionada, todos os preços são válidos
+    return true;
   }
 
   return faixas.some((faixa) => {
@@ -107,9 +105,7 @@ function filtrarPorTamanho(produtos: Product[]): Product[] {
   console.log(tamanhosSelecionados);
 
   return produtos.filter((produto) => {
-    // Verifica se há alguma interseção entre os tamanhos selecionados e o array "size" do produto
     return tamanhosSelecionados.some((tamanho) => {
-      // Verifica se o tamanho está presente diretamente no array ou dentro de um array
       return (
         produto.size.includes(tamanho) ||
         (Array.isArray(produto.size[0]) && produto.size[0].includes(tamanho))
@@ -149,10 +145,6 @@ function renderizarProduto(produto: Product): HTMLElement {
   installment.textContent = `até ${
     produto.parcelamento[0]
   }x de R$${produto.parcelamento[1].toFixed(2)}`;
-
-  // const buyButton = document.createElement("button");
-  // buyButton.classList.add("catalogo__item--btnComprar");
-  // buyButton.textContent = "COMPRAR";
 
   const buyButton = document.createElement("button");
   buyButton.classList.add("catalogo__item--btnComprar");
@@ -208,10 +200,10 @@ function renderizarProdutos(produtos: Product[], limite: number) {
       loadMoreButton.classList.add("carregarMais__desktop");
       loadMoreButton.textContent = "CARREGAR MAIS";
       loadMoreButton.addEventListener("click", () => {
-        limiteParaRenderizar += isTelaPequena ? limiteInicialMobile : 9; // Ajuste conforme necessário
+        limiteParaRenderizar += isTelaPequena ? limiteInicialMobile : 9;
         console.log("Novo Limite:", limiteParaRenderizar);
 
-        // Renderize produtos com o novo limite
+
         renderizar(limiteParaRenderizar);
       });
 
@@ -219,7 +211,7 @@ function renderizarProdutos(produtos: Product[], limite: number) {
     }
   };
 
-  // Renderizar produtos inicialmente
+
   renderizar(limiteParaRenderizar);
 }
 
@@ -236,10 +228,10 @@ async function atualizarProdutosFiltrosCores() {
 
     const novosProdutos = await response.json();
 
-    // Obtenha as cores selecionadas
+
     const coresSelecionadas = obterCoresSelecionadas();
 
-    // Filtre os produtos com base nas cores selecionadas
+
     const produtosFiltrados = novosProdutos.filter((produto: any) => {
       return (
         coresSelecionadas.length === 0 ||
@@ -416,14 +408,14 @@ async function atualizarProdutosPreco() {
     }
     const newProducts = await response.json();
 
-    // Obtenha as faixas de preço selecionadas
+
     const faixasSelecionadas = Array.from(
       document.querySelectorAll(
         ".dropdown-content__item--valores input[type='radio']:checked"
       )
     ).map((radio) => (radio as HTMLInputElement).id);
 
-    // Filtre os produtos com base nas faixas de preço selecionadas
+
     const produtosFiltrados = newProducts.filter((produto: Product) =>
       verificaFaixaDePreco(produto.price, faixasSelecionadas)
     );
@@ -544,7 +536,7 @@ function configurarEventosCheckboxCores() {
 
   checkboxesCores.forEach((checkbox) => {
     checkbox.addEventListener("click", () => {
-      atualizarProdutosFiltrosCores(); // Atualize os produtos quando um checkbox de cor for clicado
+      atualizarProdutosFiltrosCores();
     });
   });
 }
@@ -595,7 +587,7 @@ function configurarEventoFiltroCor() {
 
   if (filtroCorBtn) {
     filtroCorBtn.addEventListener("click", () => {
-      atualizarProdutosFiltrosCores(); // Atualize os produtos quando o botão de filtro for clicado
+      atualizarProdutosFiltrosCores(); 
     });
   }
 }
