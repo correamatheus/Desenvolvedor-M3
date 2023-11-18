@@ -7,11 +7,14 @@ $cor-black: #000000;
 $cor-gray: #666666;
 $cor-white: #ffffff;
 
+
+
 nav {
   display: flex;
   justify-content: space-around;
   padding-bottom: 17.37px;
   border-bottom: 2px solid #c7c7c7;
+  margin-top: 16px;
 }
 
 nav .chart {
@@ -219,7 +222,7 @@ nav .chart {
 .dropdown-content {
   margin-top: 21px;
   display: none;
-  position: absolute;
+  // position: absolute;
   top: 100%;
   left: 20px;
   background-color: $cor-white;
@@ -393,7 +396,16 @@ nav .chart {
   line-height: normal;
 }
 
+.dropdown-content__item input[type="radio"] {
+  margin-left: 0px;
+}
+
 @media screen and (min-width: 992px) {
+  .bold-label {
+    font-weight: bold;
+  } 
+
+
   .grid__desktop {
     margin-top: 54px;
   }
@@ -476,7 +488,7 @@ nav .chart {
     border-radius: 16px;
     background: #00c0ee;
     position: absolute;
-    top: 30px;
+    top: 44px;
     right: 160px;
     display: flex;
     justify-content: center;
@@ -818,6 +830,13 @@ nav .chart {
 }
 
 @media screen and (max-width: 992px) {
+  .filtrar__item--selecao {
+    display: flex;
+    justify-content: space-between;
+  }
+  .filtrar__item {
+    flex-direction: column;
+  }
   .filtros__container--desktop {
     display: none;
   }
@@ -835,7 +854,7 @@ nav .chart {
     border-radius: 16px;
     background: #00c0ee;
     position: absolute;
-    top: 15px;
+    top: 28px;
     right: 56px;
     display: flex;
     justify-content: center;
@@ -859,7 +878,7 @@ nav .chart {
     border-radius: 16px;
     background: #00c0ee;
     position: absolute;
-    top: 15px;
+    top: 28px;
     right: 68px;
     display: flex;
     justify-content: center;
@@ -883,7 +902,7 @@ nav .chart {
     border-radius: 16px;
     background: #00c0ee;
     position: absolute;
-    top: 15px;
+    top: 28px;
     right: 152px;
     display: flex;
     justify-content: center;
@@ -897,4 +916,17 @@ nav .chart {
     font-weight: 400;
     line-height: normal;
   }
+}
+
+@media screen and (min-width: 2560px) {
+    .catalogo {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    .carregarMais__desktop {
+      grid-column: 3;
+    }
+
+    .filtro__preco {
+      flex-direction: column;
+    }
 }

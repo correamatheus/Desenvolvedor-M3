@@ -108,7 +108,8 @@
       </div>
       <ul class="filtrar__list">
         <li class="filtrar__item">
-          <p>Cores</p>
+          <div class="filtrar__item--selecao">
+            <p>Cores</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -122,6 +123,8 @@
               stroke-linecap="round"
             />
           </svg>
+          </div>
+          
           <ul class="dropdown-content">
             <li class="dropdown-content__item">
               <input type="checkbox" name="" id="cor-amarelo" />
@@ -166,20 +169,23 @@
           </ul>
         </li>
         <li class="filtrar__item">
-          <p>Tamanhos</p>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="15"
-            viewBox="0 0 20 15"
-            fill="none"
-          >
-            <path
-              d="M1 1L10 14L19 1.0135"
-              stroke="#666666"
-              stroke-linecap="round"
-            />
-          </svg>
+          <div class="filtrar__item--selecao">
+            <p>Tamanhos</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="15"
+              viewBox="0 0 20 15"
+              fill="none"
+            >
+              <path
+                d="M1 1L10 14L19 1.0135"
+                stroke="#666666"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+
           <ul class="dropdownTamanho dropdown-content">
             <li class="dropdownTamanho__item">
               <input type="checkbox" name="tamanho" id="tam-p" />
@@ -216,20 +222,23 @@
           </ul>
         </li>
         <li class="filtrar__item">
-          <p>Faixa de preço</p>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="15"
-            viewBox="0 0 20 15"
-            fill="none"
-          >
-            <path
-              d="M1 1L10 14L19 1.0135"
-              stroke="#666666"
-              stroke-linecap="round"
-            />
-          </svg>
+          <div class="filtrar__item--selecao">
+            <p>Faixa de preço</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="15"
+              viewBox="0 0 20 15"
+              fill="none"
+            >
+              <path
+                d="M1 1L10 14L19 1.0135"
+                stroke="#666666"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+         
           <ul class="dropdown-content dropdown-content__valores">
             <li class="dropdown-content__item dropdown-content__item--valores">
               <input type="radio" name="radio__valor" id="faixa-0-50" />
